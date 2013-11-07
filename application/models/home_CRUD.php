@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class index_CRUD extends CI_Model {
+class home_CRUD extends CI_Model {
 
 	/*
 	This code generates the index file
