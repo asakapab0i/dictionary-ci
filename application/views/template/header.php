@@ -1,18 +1,15 @@
 <!DOCTYPE html>
 
-
 <html lang="en">
   <head>
   
-
-
     <title>{page_title}</title>
 
     <!-- Bootstrap core CSS -->
-    {bootstrap_css}
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/css/bootstrap.css'?>">
     <!-- Custom CSS -->
-    {custom_css}
-
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url() . 'assets/css/custom.css'?>">
+    
     <!-- Just for debugging purposes. Don't actually copy this line! -->
     <!--[if lt IE 9]><script src="../../docs-assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
