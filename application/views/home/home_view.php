@@ -1,19 +1,19 @@
     <div class="container">
     	<div class="row">
     		<div class="col-md-8 custom-main-workplace">
-
-    	       {word_entries}
-                <article class="custom-word">
-                    <header>
-                        <h4>{word}</h4>
-                        <p class="custom-date">06 Saturday October 2012</p>
-                    </header>
-                    <p>Similar to turrets, except in the form of random blurts of rastafarian sayings in a rasta accent.</p>
-                     by: Bryan 
-                     <button class="btn btn-warning">share this</button> 
-                     <button class="btn btn-warning">discuss this</button>
-                </article>
-                {/word_entries}
+                {words}
+                    <article class="custom-word">
+                        <header>
+                            <h4><?php echo anchor('dictionary/define/{word}/defid/{word_id}', '{word}');?></h4>
+                            <p class="custom-date">{datew}</p>
+                        </header>
+                        <p>{definition}</p>
+                         by: <a href="#" class="btn btn-info">{name}</a> 
+                         <button class="btn btn-warning">share this</button> 
+                         <button class="btn btn-warning">discuss this</button>
+                    </article>
+                {/words}
+            
           
 
     			{pagination_links}

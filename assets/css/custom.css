@@ -12,11 +12,42 @@ hr{
 	margin-top: 10px;
 	margin-bottom: 5px;
 }
+
+.pagination a{
+	color: black;
+}
+
+.pagination > li:first-child > a{
+	border-radius: 0px;
+}
+
+.pagination > li:last-child > a{
+	border-radius: 0px;
+}
+
+.pagination > .active > a{
+	background-color: #ed9c28;
+	border-color: #d58512;
+}
+
+.pagination > .active > a:hover{
+	background-color: #ed9c28;
+	border-color: #d58512;
+}
+
+a{
+	color: black;
+}
+
 /*****end bootstrap overrides**********/
 
 /****words css***/
 .custom-word{
-	padding: 20px;
+	padding: 7px 20px 7px 20px;
+}
+
+.custom-pagination{
+	margin-left: 20px;
 }
 
 .custom-date{

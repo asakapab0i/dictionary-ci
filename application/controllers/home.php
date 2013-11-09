@@ -18,7 +18,14 @@ class Home extends CI_Controller {
 		$header['main_menu'] = self::main_nav();
 		$header['sub_menu'] = self::header_nav();
 		//get words from data
-		$data = self::get_words();
+
+		//array('words' => array('word' => 'ambot', 'name' => 'jay'));
+		//self::get_words();
+
+	
+
+		$data['words'] = self::get_words(3, $this->uri->segment(3));
+		//$data['sample'] = 
 		//pagination call
 		$data['pagination_links'] = self::pagination_link();
 		//load to view
@@ -28,15 +35,16 @@ class Home extends CI_Controller {
 	}
 
 /*******************************Class Helpers******************************************/
-	private function get_words(){
-		$resultset = $this->home_CRUD->index_get_data();
-		$data = array();
-		foreach ($resultset as $key => $row) {
-			$data = array('word_entries' => array('word' => $row['word']));
+	private function get_words($limit, $offset){
+		//fixed stubborn bug
+		if($offset < 1){
+			$offset = 1;
+		}else{
+			$offset = $this->uri->segment(3);
 		}
 
-		var_dump($data);
-		die();
+		return $this->home_CRUD->index_get_data($limit, $offset);
+		//$data = array();
 	}
 
 	private function main_nav($current_nav = 'home'){
@@ -59,7 +67,6 @@ class Home extends CI_Controller {
 		array_unshift($letters,'random');
 		$subMenu = '';
 		foreach ($letters as $key => $value) {
-
 			if ($value == $letter) {
 				$subMenu .= anchor('dictionary/popular/'.$value.'', $value,'class="btn btn-default custom-active"');
 			}else{
@@ -73,9 +80,10 @@ class Home extends CI_Controller {
 
 	private function pagination_link(){
 		//pagination
-		$config['base_url'] = base_url() . 'home/page';
-		$config['total_rows'] = 200; //$this->home_CRUD->index_count_data();
-		$config['per_page'] = 20; 
+		//$config['base_url'] = base_url() . 'home/page';
+		$config['total_rows'] = $this->home_CRUD->index_count_data();
+		//$config['per_page'] = 7; 
+
 		$this->pagination->initialize($config); 
 		return $this->pagination->create_links();
 	}
