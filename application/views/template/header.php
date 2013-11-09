@@ -39,20 +39,10 @@
 <!-- Navigation -->
     <div class="row">
 
-      <div class="col-md-12 custom-menu">
-            <!-- Standard button -->
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">word of the day</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">dictionary</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">add word</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">authors</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">tags</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">recent</button>
-        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">blog</button>
-          
-      </div>
-
+      <div class="col-md-12 custom-menu">{main_menu}</div>
       <div class="col-md-12 custom-subMenu">{sub_menu}</div>
 
     </div>
     <hr/>
   </div>
+  

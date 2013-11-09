@@ -1,3 +1,4 @@
+/*bootstrap overrides*/
 .container{
 	width: 950px;
 }
@@ -11,6 +12,22 @@ hr{
 	margin-top: 10px;
 	margin-bottom: 5px;
 }
+/*****end bootstrap overrides**********/
+
+/****words css***/
+.custom-word{
+	padding: 20px;
+}
+
+.custom-date{
+	font-style: italic;
+}
+
+.custom-active{
+  color: ##FF9B44;
+  background-color: #FFB951;
+  border-color: #FFC303;
+}
 
 .custom-searchPanel{
 	margin-top: 40px;
@@ -22,13 +39,13 @@ hr{
 	font-size: 20px;
 }
 
-.custom-menuPadding{
-	padding-left: 40px;
-	margin-right: 0px;
-}
-
 .custom-menu{
 	margin-top: 10px;
+}
+
+.custom-menu a{
+	margin-right: 10px;
+	padding: 10px 20px 10px 20px;
 }
 
 .custom-logo{
@@ -55,9 +72,17 @@ hr{
 	font-size: 20;
 }
 
-.custom-centerMenu{
-	padding-right: 15px;
-	padding-left: 15px;
-	margin-right: auto;
-	margin-left: auto;
+/*custom-main-workplace*/
+.custom-main-workplace{
+	border-right: 1px solid #eeeeee;
+}
+
+/* sidebar mailing list */
+.custom-mailing-list input{
+	margin-right: 10px;
+	padding: 0px 5px 0px 5px;
+}
+
+.custom-mailing-list{
+	text-align: center;
 }
