@@ -14,9 +14,9 @@ class Home extends CI_Controller {
 
 	public function page(){
 		//page info and current nav
-		$header['page_title'] = "Dictionary Homepage";
+		$header['page_title'] = "Dictionary Homepage | Word of the day";
 		$header['main_menu'] = self::main_nav();
-		$header['sub_menu'] = self::header_nav();
+		$header['sub_menu'] = self::sub_nav();
 		//get words from data
 
 		//array('words' => array('word' => 'ambot', 'name' => 'jay'));
@@ -35,6 +35,7 @@ class Home extends CI_Controller {
 	}
 
 /*******************************Class Helpers******************************************/
+
 	private function get_words($limit, $offset){
 		//fixed stubborn bug
 		if($offset < 1){
@@ -49,7 +50,7 @@ class Home extends CI_Controller {
 
 	private function main_nav($current_nav = 'home'){
 		//populate navication array
-		$navigation = array('home' => 'word of the day','dictionary' => 'dictionary','add' => 'add word','authors'=>'authors','tags'=>'tags', 'recent'=>'recent','blog'=>'blog');
+		$navigation = array('home' => 'word of the day','dictionary/popular/a' => 'dictionary','add' => 'add word','authors'=>'authors','tags'=>'tags', 'recent'=>'recent','blog'=>'blog');
 		$mainMenu = '';
 		foreach ($navigation as $key => $value) {
 			if ($current_nav == $key) {
@@ -61,7 +62,7 @@ class Home extends CI_Controller {
 		return $mainMenu;
 	}
 
-	private function header_nav($letter = NULL){
+	private function sub_nav($letter = NULL){
 		//populate letters
 		$letters = range('a', 'z');
 		array_unshift($letters,'random');
