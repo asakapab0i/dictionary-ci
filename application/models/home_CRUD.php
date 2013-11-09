@@ -9,19 +9,22 @@ class Home_CRUD extends CI_Model{
                                         example.example,
                                         author.name,
                                         definition.word_id,
+                                        definition.tag_id,
                                         definition.example_id,
                                         definition.id AS defid,
                                         definition.definition,
                                         DATE_FORMAT(wordoftheday.date,'%d %W %M %Y') as datew,
                                         author.name,
                                         author.email,
-                                        wordmap.date
+                                        wordmap.date,
+                                        tag.tag
                                         FROM wordmap
                                         INNER JOIN word ON wordmap.word_id = word.id
                                         INNER JOIN author ON wordmap.author_id = author.id
                                         INNER JOIN definition ON wordmap.definition_id = definition.id
                                         INNER JOIN example on definition.example_id = example.id
                                         INNER JOIN wordoftheday ON wordmap.id = wordoftheday.wordmap_id
+                                        INNER JOIN tag ON definition.tag_id = tag.id
                                         ORDER BY datew DESC LIMIT $offset,$limit")->result_array();
 	}
 

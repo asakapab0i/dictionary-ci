@@ -22,9 +22,10 @@ class Home extends CI_Controller {
 		//array('words' => array('word' => 'ambot', 'name' => 'jay'));
 		//self::get_words();
 
-	
+		$limit = 3;
 
-		$data['words'] = self::get_words(3, $this->uri->segment(3));
+		$data['words'] = self::get_words($limit, $this->uri->segment(3));
+		$data['tag_generator'] = self::generateTags($limit, $this->uri->segment(3));
 		//$data['sample'] = 
 		//pagination call
 		$data['pagination_links'] = self::pagination_link();
@@ -35,6 +36,26 @@ class Home extends CI_Controller {
 	}
 
 /*******************************Class Helpers******************************************/
+
+	private function generateTags($limit, $uri){
+		$data = self::get_words($limit, $uri);
+		return self::runTagGenerator($data);
+	}
+
+	private function runTagGenerator($data){
+		foreach ($data as $key => $row) {
+					$tags = $row['tag'];
+					$tags_array = explode(',', $tags);
+					//$result = array();
+					foreach ($tags_array as $key => $value) {
+						$result[] = array('tags'=>anchor('dictionary/define/'.$value.'', $value, 'class="btn btn-primary custom-list-word"'));
+					}
+
+				}
+
+				return $result;
+
+	}
 
 	private function get_words($limit, $offset){
 		//fixed stubborn bug

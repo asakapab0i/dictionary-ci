@@ -8,6 +8,9 @@
                             <p class="custom-date">{datew}</p>
                         </header>
                         <p>{definition}</p>
+                        {tag_generator}
+                                {tags}
+                            {/tag_generator} <br/>
                          by: <a href="#" class="btn btn-info">{name}</a> 
                          <button class="btn btn-warning">share this</button> 
                          <button class="btn btn-warning">discuss this</button>
