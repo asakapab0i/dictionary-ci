@@ -20,3 +20,39 @@
     <![endif]-->
   </head>
   <body>
+
+  <div class="container">
+    <div class="row">
+        <div class="col-md-6">
+              <img class="custom-logo" src="<?php echo base_url() . 'assets/img/logo.png'?>">
+        </div>
+        <div class="col-md-6">
+          <div class="custom-searchPanel pull-right">
+          <span>search something or type your name..</span> 
+            <form  method="get" action="http://localhost/dict/define">
+            <input placeholder="search here" id="search" name="term" type="text" size="50" class="custom-bigFatSearch" value="" autocomplete="off"> 
+            <input class=" custom-fontSize btn btn-default" id="searchbutton" type="submit" value="search">
+            </form>
+          </div>
+        </div>
+    </div>
+<!-- Navigation -->
+    <div class="row">
+
+      <div class="col-md-12 custom-menu">
+            <!-- Standard button -->
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">word of the day</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">dictionary</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">add word</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">authors</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">tags</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">recent</button>
+        <button type="button" class="btn btn-default custom-fontSize custom-menuPadding">blog</button>
+          
+      </div>
+
+      <div class="col-md-12 custom-subMenu">{sub_menu}</div>
+
+    </div>
+    <hr/>
+  </div>

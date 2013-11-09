@@ -1,8 +1,63 @@
 .container{
-	width: 500px;
+	width: 950px;
 }
 
 .btn{
 	
 	border-radius: 0px;
+}
+
+hr{
+	margin-top: 10px;
+	margin-bottom: 5px;
+}
+
+.custom-searchPanel{
+	margin-top: 40px;
+}
+
+.custom-fontSize{
+	padding:10px 8px;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.custom-menuPadding{
+	padding-left: 40px;
+	margin-right: 0px;
+}
+
+.custom-menu{
+	margin-top: 10px;
+}
+
+.custom-logo{
+	width: 450px;
+	height: 100px;
+}
+
+.custom-subMenu{
+	margin-top: 5px;
+	font-size: 4px;
+	padding: 0px;
+	margin-left: 13px;
+}
+
+.custom-subMenu a{
+	color: black;
+	padding-right: 10px;
+	padding-left: 10px;
+	margin-right: 4px;
+}
+
+
+.custom-bigFatSearch{
+	font-size: 20;
+}
+
+.custom-centerMenu{
+	padding-right: 15px;
+	padding-left: 15px;
+	margin-right: auto;
+	margin-left: auto;
 }
