@@ -60,25 +60,27 @@ class Dictionary extends CI_Controller{
 		$this->load->view('template/footer.php');	
 	}
 
-	public function define($word, $defid = false){
+	public function define($word = NULL, $defid = false){
+
 		$word = urldecode($word);
 		$header['page_title'] = "Define | Word $word";
 		$header['main_menu'] = self::main_nav('dictionary/popular/a');
 		$header['sub_menu'] = self::sub_nav(strtolower($word[0]));
+		$header['word'] = $word;
 		
 		
 		
 		if(!$defid){
 			if (!self::checkWord($word)) {
-				 //redirect('dictionary/undefined/'.$word.' ', 'refresh');
+				 redirect('dictionary/popular/random/', 'refresh');
 			}else{
 				$data['define_word'] = self::defineWord($word);
-				$data['tag_generator'] = self::generateTags($word, $defid);
+				$data['tag_generator'] = self::generateTags($word);
 			}
 			
 		}else{
 			if (!self::checkWord($word)) {
-				 //redirect('dictionary/undefined/'.$word.' ', 'refresh');
+				 redirect('dictionary/popular/random/', 'refresh');
 			}else{
 				$data['define_word'] = self::defineWordWithDefId($word, $defid);
 				$data['tag_generator'] = self::generateTags($word, $defid);
