@@ -14,7 +14,7 @@ class Home extends CI_Controller {
 
 	public function page(){
 		//page info and current nav
-		$header['page_title'] = "Dictionary Homepage | Word of the day";
+		$header['page_title'] = "Homepage | Word of the day";
 		$header['main_menu'] = self::main_nav();
 		$header['sub_menu'] = self::sub_nav();
 		//get words from data
@@ -25,7 +25,8 @@ class Home extends CI_Controller {
 		$limit = 3;
 
 		$data['words'] = self::get_words($limit, $this->uri->segment(3));
-		$data['tag_generator'] = self::generateTags($limit, $this->uri->segment(3));
+		//$data['tag_generator'] = self::generateTags($limit, $this->uri->segment(3));
+
 		//$data['sample'] = 
 		//pagination call
 		$data['pagination_links'] = self::pagination_link();
@@ -37,25 +38,26 @@ class Home extends CI_Controller {
 
 /*******************************Class Helpers******************************************/
 
-	private function generateTags($limit, $uri){
-		$data = self::get_words($limit, $uri);
-		return self::runTagGenerator($data);
-	}
+	// private function generateTags($limit = 1, $uri){
 
-	private function runTagGenerator($data){
-		foreach ($data as $key => $row) {
-					$tags = $row['tag'];
-					$tags_array = explode(',', $tags);
-					//$result = array();
-					foreach ($tags_array as $key => $value) {
-						$result[] = array('tags'=>anchor('dictionary/define/'.$value.'', $value, 'class="btn btn-primary custom-list-word"'));
-					}
+	
+	// 	$data = self::get_words($limit, $uri);
+	// 	return self::runTagGenerator($data);
+	// }
 
-				}
+	// private function runTagGenerator($data){
+	// 		foreach ($data as $key => $row) {
+	// 				$tags = $row['tag'];
+	// 				$tags_array = explode(',', $tags);
+	// 				//$result = array();
+	// 				foreach ($tags_array as $key => $value) {
+	// 					$result[] = array('tags'=>anchor('dictionary/define/'.$value.'', $value, 'class="btn btn-primary custom-list-word"'));
+	// 				}
 
-				return $result;
-
-	}
+	// 			}
+				
+	// 			return $result;
+	// }
 
 	private function get_words($limit, $offset){
 		//fixed stubborn bug

@@ -15,7 +15,8 @@
                          by: <a href="#" class="btn btn-info">{name}</a> 
                          <button class="btn btn-warning">share this</button> 
                          <button class="btn btn-warning">discuss this</button>
-                    </article>                    {/define_word}
+                    </article>                    
+                    {/define_word}
               </div>
     		</div>
     		<div class="col-md-4 custom-mailing-list">

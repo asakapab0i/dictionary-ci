@@ -112,8 +112,86 @@ class Dictionary_CRUD extends CI_Model {
                                         WHEN '$defid' THEN 0 ELSE 1 END")->result_array();
 	}
 
-     public function dictionary_get_generate_tags($word){
+     public function dictionary_get_num_rows($word){
+          $query =  $this->db->query("SELECT word.word,
+                                        word.id,
+                                        example.example,
+                                        author.name,
+                                        definition.word_id,
+                                        definition.example_id,
+                                        definition.definition,
+                                        definition.id AS defid,
+                                        DATE_FORMAT(wordmap.date,'%d %W %M %Y') as datew,
+                                        vote.up,
+                                        vote.down,
+                                        vote.word_id,
+                                        author.name,
+                                        tag.tag,
+                                        wordmap.id AS wordmapid,
+                                        author.email
+                                        FROM wordmap
+                                        INNER JOIN word ON wordmap.word_id = word.id
+                                        INNER JOIN author ON wordmap.author_id = author.id
+                                        INNER JOIN definition ON wordmap.definition_id = definition.id
+                                        INNER JOIN example ON definition.example_id = example.id
+                                        INNER JOIN vote ON definition.vote_id = vote.id
+                                        INNER JOIN tag ON definition.tag_id = tag.id
+                                        WHERE word.word = '$word'");
+          return $query->num_rows();
+     }
+
+     public function random_get_total_words(){
+          $query = $this->db->query("SELECT word.word,
+                                        word.id,
+                                        example.example,
+                                        author.name,
+                                        definition.word_id,
+                                        definition.example_id,
+                                        definition.definition,
+                                        definition.id AS defid,
+                                        vote.up,
+                                        vote.down,
+                                        vote.word_id,
+                                        author.name,
+                                        tag.tag,
+                                        author.email
+                                        FROM wordmap
+                                        INNER JOIN word ON wordmap.word_id = word.id
+                                        INNER JOIN author ON wordmap.author_id = author.id
+                                        INNER JOIN definition ON wordmap.definition_id = definition.id
+                                        INNER JOIN example ON definition.example_id = example.id
+                                        INNER JOIN vote ON definition.vote_id = vote.id
+                                        INNER JOIN tag ON definition.tag_id = tag.id");
+
+          return $query->num_rows();
+     }
+
+     public function random_get_random_word($rand_num){
+
+            return $query = $this->db->query("SELECT word.word,
+                                        word.id,
+                                        example.example,
+                                        author.name,
+                                        definition.word_id,
+                                        definition.example_id,
+                                        definition.definition,
+                                        definition.id AS defid,
+                                        vote.up,
+                                        vote.down,
+                                        vote.word_id,
+                                        author.name,
+                                        tag.tag,
+                                        author.email
+                                        FROM wordmap
+                                        INNER JOIN word ON wordmap.word_id = word.id
+                                        INNER JOIN author ON wordmap.author_id = author.id
+                                        INNER JOIN definition ON wordmap.definition_id = definition.id
+                                        INNER JOIN example ON definition.example_id = example.id
+                                        INNER JOIN vote ON definition.vote_id = vote.id
+                                        INNER JOIN tag ON definition.tag_id = tag.id
+                                        WHERE word.id = '$rand_num' ")->result_array();
           
+     
      }
 
 }

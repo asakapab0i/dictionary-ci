@@ -1,4 +1,7 @@
 /*bootstrap overrides*/
+.alert{
+	border-radius: 0px;
+}
 .container{
 	width: 950px;
 }
