@@ -3,9 +3,13 @@
         <div class="col-md-8 custom-main-workplace">
           <div class="custom-add-form">
 
-               <form role="form">
+              
+               <?php 
+                $attributes = array('method' => 'post','role' => 'form','class' => 'email', 'id' => 'add-form');
+                echo form_open('add/save', $attributes);
+                ?>
             <div class="form-group">
-              <label for="word">Word</label>
+              <label for="word">Word - 'ambot', 'hello world', 'utot'</label>
               <?php 
               $data = array('name' => 'word',
                             'id' => 'word',
@@ -16,7 +20,7 @@
               ?>
             </div>
             <div class="form-group">
-              <label for="definition">Definition</label>
+              <label for="definition">Definition - 'this is awesome-word i just discovered!'</label>
               <?php 
               $data = array('name' => 'definition',
                             'id' => 'definition',
@@ -28,7 +32,7 @@
               ?>
             </div>
             <div class="form-group">
-              <label for="example">Example</label>
+              <label for="example">Example - what an awesome-word that is!</label>
                <?php 
               $data = array('name' => 'example',
                             'id' => 'example',
@@ -41,7 +45,7 @@
             </div>
 
              <div class="form-group">
-              <label for="tags">Related Tags</label>
+              <label for="tags">Related Tags - 'awesome, word, phrase, so cool'</label>
                <?php 
               $data = array('name' => 'tags',
                             'id' => 'tags',
@@ -53,7 +57,7 @@
             </div>
 
              <div class="form-group">
-              <label for="pname">Psuedo Name</label>
+              <label for="pname">Psuedo Name - 'juan tamad'</label>
                <?php 
               $data = array('name' => 'pname',
                             'id' => 'pname',
@@ -65,7 +69,7 @@
             </div>
 
              <div class="form-group">
-              <label for="tags">Email</label>
+              <label for="tags">Email - 'juan@tamad.com'</label>
                <?php 
               $data = array('name' => 'email',
                             'id' => 'email',
@@ -83,8 +87,7 @@
           </div>
         </div>
         <div class="col-md-4 custom-mailing-list">
-          <h5>Subscribe to our mailing list!</h5>
-          <?php //$this->load->view('template/sidebar')?>
+          <?php echo validation_errors(); ?>
         </div>
       </div>
     <!-- {side_bar} -->
