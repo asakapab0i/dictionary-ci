@@ -31,6 +31,9 @@ class Dictionary_CRUD extends CI_Model {
 	}
 
 	public function define_get_define_word($word){
+
+          $word = $this->db->escape_str($word);
+
 		return $this->db->query("SELECT word.word,
                                         word.id,
                                         example.example,
@@ -58,6 +61,9 @@ class Dictionary_CRUD extends CI_Model {
 	}
 
 	public function permalink_get_define_word($word, $defid){
+
+          $word = $this->db->escape_str($word);
+
 		return $this->db->query("SELECT word.word,
                                         word.id,
                                         example.example,
@@ -85,6 +91,9 @@ class Dictionary_CRUD extends CI_Model {
 	}
 
 	public function define_get_define_word_with_id($word, $defid){
+
+          $word = $this->db->escape_str($word);
+
 		return $this->db->query("SELECT word.word,
                                         word.id,
                                         example.example,
@@ -113,6 +122,9 @@ class Dictionary_CRUD extends CI_Model {
 	}
 
      public function dictionary_get_num_rows($word){
+
+          $word = $this->db->escape_str($word);
+          
           $query =  $this->db->query("SELECT word.word,
                                         word.id,
                                         example.example,
@@ -193,5 +205,7 @@ class Dictionary_CRUD extends CI_Model {
           
      
      }
+
+   
 
 }

@@ -10,7 +10,7 @@
         </div>
     		<div class="col-md-4 custom-mailing-list">
     			<h5>Subscribe to our mailing list!</h5>
-    			<?php $this->load->view('template/sidebar')?>
+    			<?php //$this->load->view('template/sidebar')?>
     		</div>
     	</div>
     <!-- {side_bar} -->

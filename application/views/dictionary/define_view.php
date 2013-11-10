@@ -20,8 +20,19 @@
               </div>
     		</div>
     		<div class="col-md-4 custom-mailing-list">
-    			<h5>Subscribe to our mailing list!</h5>
-    			<?php $this->load->view('template/sidebar')?>
+                {sidebar_words_up}
+                <?php echo anchor('dictionary/define/{word}', '{word}', 'class="btn btn-warning custom-list-word"');?>
+                {/sidebar_words_up}
+
+                <strong>{sidebar_words_current}
+                <?php echo anchor('dictionary/define/{word}', '{word}', 'class="btn btn-info custom-list-word"');?>
+                {/sidebar_words_current}</strong>
+
+                {sidebar_words_down}
+                <?php echo anchor('dictionary/define/{word}', '{word}', 'class="btn btn-warning custom-list-word"');?>
+                {/sidebar_words_down}
+
+
     		</div>
     	</div>
     <!-- {side_bar} -->

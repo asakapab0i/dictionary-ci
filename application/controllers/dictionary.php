@@ -2,6 +2,8 @@
 
 class Dictionary extends CI_Controller{
 
+	
+
 	public function __construct(){
 		parent::__construct();
 		$this->load->model('dictionary_CRUD');
@@ -14,7 +16,6 @@ class Dictionary extends CI_Controller{
 	public function popular($letter = 'a'){
 		$letter = urlencode($letter);
 
-
 		//generate random words
 		if($this->uri->segment(3) == 'random'){
 			//generate random number
@@ -25,15 +26,23 @@ class Dictionary extends CI_Controller{
 			foreach ($dictionary as $key => $row) {
 				$word = $row['word'];
 			}
+
+			if(!self::checkWord($word)){
+
+				redirect('dictionary/popular/random/', 'refresh');
+			}
+
 			//get the data from that random number
 
 			redirect('dictionary/define/'.$word.'', 'refresh');
 		}
 
 		//page info and current nav
-		$header['page_title'] = "Dictionary | Letter $letter";
-		$header['main_menu'] = self::main_nav('dictionary/popular/a');
-		$header['sub_menu'] = self::sub_nav(strtolower($letter));
+		$global = self::load_global_class();
+		$header['page_title'] = "Dictionary | Letter ".strtoupper($letter);
+		$header['main_menu'] = $global->main_nav('dictionary/popular/a');
+		$header['sub_menu'] = $global->sub_nav(strtolower($letter));
+		$header['word'] = '';
 		
 
 		$data['total_words'] = self::popularTotalWords($letter);
@@ -47,9 +56,11 @@ class Dictionary extends CI_Controller{
 	}
 
 	public function browse($letter){
-		$header['page_title'] = "Browse | Letter $letter";
-		$header['main_menu'] = self::main_nav('dictionary/popular/a');
-		$header['sub_menu'] = self::sub_nav(strtolower($letter));
+		$global = self::load_global_class();
+		$header['page_title'] = "Browse | Letter " . strtoupper($letter);
+		$header['main_menu'] = $global->main_nav('dictionary/popular/a');
+		$header['sub_menu'] = $global->sub_nav(strtolower($letter));
+		$header['word'] = '';
 		
 
 		$data['browse_words'] = self::browseWords($letter);
@@ -60,30 +71,36 @@ class Dictionary extends CI_Controller{
 		$this->load->view('template/footer.php');	
 	}
 
-	public function define($word = NULL, $defid = false){
-
+	public function define($word = NULL, $defid = NULL){
+		$global = self::load_global_class();
 		$word = urldecode($word);
-		$header['page_title'] = "Define | Word $word";
-		$header['main_menu'] = self::main_nav('dictionary/popular/a');
-		$header['sub_menu'] = self::sub_nav(strtolower($word[0]));
+		$header['page_title'] = "Define | $word";
+		$header['main_menu'] = $global->main_nav('dictionary/popular/a');
+		$header['sub_menu'] = $global->sub_nav(strtolower($word[0]));
 		$header['word'] = $word;
 		
 		
 		
 		if(!$defid){
 			if (!self::checkWord($word)) {
-				 redirect('dictionary/popular/random/', 'refresh');
+				 redirect('dictionary/undefined/'.$word.' ', 'refresh');
 			}else{
 				$data['define_word'] = self::defineWord($word);
 				$data['tag_generator'] = self::generateTags($word);
+				$data['sidebar_words_up'] = $global->sidebarUp($word);
+				$data['sidebar_words_current'] = $global->sidebarCurrent($word);
+				$data['sidebar_words_down'] = $global->sidebarDown($word);
 			}
 			
 		}else{
 			if (!self::checkWord($word)) {
-				 redirect('dictionary/popular/random/', 'refresh');
+				 redirect('dictionary/undefined/'.$word.' ', 'refresh');
 			}else{
 				$data['define_word'] = self::defineWordWithDefId($word, $defid);
 				$data['tag_generator'] = self::generateTags($word, $defid);
+				$data['sidebar_words_up'] = $global->sidebarUp($word);
+				$data['sidebar_words_current'] = $global->sidebarCurrent($word);
+				$data['sidebar_words_down'] = $global->sidebarDown($word);
 			}
 			
 		}
@@ -91,6 +108,7 @@ class Dictionary extends CI_Controller{
 		
 
 		//load to view
+		//$this->parser->parse('template/sidebar', $sidebar);
 		$this->parser->parse('template/header', $header);
 		$this->parser->parse('dictionary/define_view', $data);
 		$this->load->view('template/footer.php');	
@@ -98,30 +116,35 @@ class Dictionary extends CI_Controller{
 
 	public function permalink($word, $defid){
 		$word = urldecode($word);
-		$header['page_title'] = "Permalink | Word $word";
-		$header['main_menu'] = self::main_nav('dictionary/popular/a');
-		$header['sub_menu'] = self::sub_nav(strtolower($word[0]));
+		$global = self::load_global_class();
+		$header['page_title'] = "Permalink | $word";
+		$header['main_menu'] = $global->main_nav('dictionary/popular/a');
+		$header['sub_menu'] = $global->sub_nav(strtolower($word[0]));
+		$header['word'] = $word;
 		
 
 		$data['perma_word'] = self::permaWord($word, $defid);
 		$data['tag_generator'] = self::generateTags($word, $defid);
+
+		$data['sidebar_words_up'] = $global->sidebarUp($word);
+		$data['sidebar_words_current'] = $global->sidebarCurrent($word);
+		$data['sidebar_words_down'] = $global->sidebarDown($word);
+		
 		//load to view
 		$this->parser->parse('template/header', $header);
 		$this->parser->parse('dictionary/perma_view', $data);
 		$this->load->view('template/footer.php');	
 	}
 
-	public function undefined($word = 'kokoy'){
+	public function undefined($word = ''){
 		$word = urldecode($word);
+		$global = self::load_global_class();
 		$header['page_title'] = "Undefined | Word $word";
-		$header['main_menu'] = self::main_nav('dictionary/popular/a');
-		$header['sub_menu'] = self::sub_nav(strtolower($word[0]));
+		$header['main_menu'] = $global->main_nav('dictionary/popular/a');
+		$header['sub_menu'] = $global->sub_nav(strtolower($word[0]));
 
 		$data['word'] = $word;
-		
 
-		//$data['perma_word'] = self::permaWord($word, $defid);
-		//$data['tag_generator'] = self::generateTags($word, $defid);
 		//load to view
 		$this->parser->parse('template/header', $header);
 		$this->parser->parse('dictionary/undefined_view', $data);
@@ -129,7 +152,12 @@ class Dictionary extends CI_Controller{
 	}
 
 	/*******************************Class Helpers******************************************/
-
+	private function load_global_class(){
+		//include and initialized global class
+		include 'global_class.php';
+		$global = new Global_class();
+		return $global;
+	}
 	/*******************************Dictionary Method*/
 
 	private function checkWord($word, $defid = false){
@@ -224,38 +252,6 @@ class Dictionary extends CI_Controller{
 				return $result;
 
 	}
-
-	private function main_nav($current_nav = 'home'){
-		//populate navication array
-		$navigation = array('home' => 'word of the day','dictionary/popular/a' => 'dictionary','add' => 'add word','authors'=>'authors','tags'=>'tags', 'recent'=>'recent','blog'=>'blog');
-		$mainMenu = '';
-		foreach ($navigation as $key => $value) {
-			if ($current_nav == $key) {
-				$mainMenu .= anchor($key, $value,'class="btn btn-default custom-fontSize custom-active"');
-			}else{
-				$mainMenu .= anchor($key, $value,'class="btn btn-default custom-fontSize"');
-			}
-		}
-		return $mainMenu;
-	}
-
-	private function sub_nav($letter = NULL){
-		//populate letters
-		$letters = range('a', 'z');
-		array_unshift($letters,'random');
-		$subMenu = '';
-		foreach ($letters as $key => $value) {
-			if ($value == $letter) {
-				$subMenu .= anchor('dictionary/popular/'.$value.'', $value,'class="btn btn-default custom-active"');
-			}else{
-				$subMenu .= anchor('dictionary/popular/'.$value.'', $value, 'class="btn btn-default"');
-			}
-		}
-
-		return $subMenu;
-	
-	}
-
 
 
 }

@@ -29,8 +29,8 @@
         <div class="col-md-6">
           <div class="custom-searchPanel pull-right">
           <span>search something or type your name..</span> 
-            <form  method="get" action="http://localhost/dict/define">
-            <input value="{word}" placeholder="search here" id="search" name="term" type="text" size="50" class="custom-bigFatSearch" value="" autocomplete="off"> 
+            <?php echo form_open('global_class/search_term'); ?>
+            <input value="{word}" placeholder="search here" id="search" name="term" type="text" size="33" class="custom-bigFatSearch" value="" autocomplete="off"> 
             <input class=" custom-fontSize btn btn-default" id="searchbutton" type="submit" value="search">
             </form>
           </div>

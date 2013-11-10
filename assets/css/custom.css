@@ -1,4 +1,7 @@
 /*bootstrap overrides*/
+.form-control{
+	border-radius: 0px;
+}
 .alert{
 	border-radius: 0px;
 }
@@ -42,11 +45,28 @@ a{
 	color: black;
 }
 
+.form-control{
+	width: 350px;
+}
+
+.form-group{
+	margin-bottom: 8px;
+}
+
 /*****end bootstrap overrides**********/
 
 /****words css***/
 .custom-word{
 	padding: 7px 20px 7px 20px;
+}
+
+.custom-add-form{
+	padding: 0px 30px 0px 70px;
+}
+
+.custom-footer{
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 .custom-list-word{
@@ -81,9 +101,14 @@ a{
 	margin-top: 10px;
 }
 
-.custom-menu a{
+/*.custom-menu a{
 	margin-right: 10px;
 	padding: 10px 20px 10px 20px;
+}*/
+
+.custom-menu a{
+	margin-right: 2px;
+	padding: 9px 10px 8px 13px;
 }
 
 .custom-logo{
@@ -107,7 +132,7 @@ a{
 
 
 .custom-bigFatSearch{
-	font-size: 20;
+	font-size: 20px;
 }
 
 /*custom-main-workplace*/

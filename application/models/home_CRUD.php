@@ -25,7 +25,7 @@ class Home_CRUD extends CI_Model{
                                         INNER JOIN example on definition.example_id = example.id
                                         INNER JOIN wordoftheday ON wordmap.id = wordoftheday.wordmap_id
                                         INNER JOIN tag ON definition.tag_id = tag.id
-                                        ORDER BY datew DESC LIMIT $offset,$limit")->result_array();
+                                        ORDER BY wordoftheday.date desc LIMIT $offset,$limit")->result_array();
 	}
 
 	public function index_count_data(){
