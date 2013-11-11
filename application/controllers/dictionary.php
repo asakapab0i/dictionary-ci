@@ -137,6 +137,11 @@ class Dictionary extends CI_Controller{
 	}
 
 	public function undefined($word = ''){
+		
+		if ($word == '') {
+			 redirect('dictionary/popular/random', 'refresh');
+		}		
+
 		$word = urldecode($word);
 		$global = self::load_global_class();
 		$header['page_title'] = "Undefined | Word $word";

@@ -7,7 +7,7 @@ class Add extends CI_Controller{
 		$this->load->model('add_CRUD');
 	}
 
-	public function index(){
+	public function index($word = ''){
 		//$global = self::load_global_class();
 
 		//page info and current nav
@@ -24,7 +24,7 @@ class Add extends CI_Controller{
 		$this->load->view('template/footer.php');
 	}
 
-	public function save(){
+	public function save($word = ''){
 		$header['page_title'] = "Add word";
 		$header['main_menu'] = self::main_nav('add');
 		$header['sub_menu'] = self::sub_nav();
