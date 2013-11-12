@@ -30,6 +30,8 @@ class Add extends CI_Controller{
 		$header['sub_menu'] = self::sub_nav();
 		$header['word'] = '';
 
+		$data['success'] = FALSE;
+
 		$formdata = array('word' => $this->input->post('word'),
 							'definition' => $this->input->post('definition'),
 							'example' => $this->input->post('example'),
@@ -48,13 +50,17 @@ class Add extends CI_Controller{
 
 		if ($this->form_validation->run() == FALSE)
 		{
-
+			$data['success'] = TRUE;
 			$this->parser->parse('template/header', $header);
-			$this->load->view('add/add_view.php');
+			$this->load->view('add/add_view.php', $data);
 			$this->load->view('template/footer.php');
 		}
 		else
 		{	//save the data
+
+			
+
+
 			$this->load->view('add/success');
 		}
 
