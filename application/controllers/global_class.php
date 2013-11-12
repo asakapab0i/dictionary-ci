@@ -11,7 +11,7 @@ class Global_class extends CI_Controller
 	}
 
 	public function main_nav($current_nav = 'home'){
-		//populate navication array
+		//populate navigation array
 		$navigation = array('home' => array('word of the day', 'glyphicon glyphicon-bookmark'),
 							'dictionary/popular/a' => array('dictionary', 'glyphicon glyphicon-book'),
 							'add' => array('add word', 'glyphicon glyphicon-plus'),
