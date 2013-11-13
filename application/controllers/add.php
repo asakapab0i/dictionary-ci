@@ -16,12 +16,41 @@ class Add extends CI_Controller{
 		$header['sub_menu'] = self::sub_nav();
 		$header['word'] = '';
 
+		$data['success'] = FALSE;
+
 
 
 		//load to view
 		$this->parser->parse('template/header', $header);
-		$this->load->view('add/add_view');
+		$this->load->view('add/add_view', $data);
 		$this->load->view('template/footer.php');
+	}
+
+	public function callback_check_word_validation($email, $pname){
+		$checkpname = $this->add_CRUD->check_pname($pname);
+		$checkemail = $this->add_CRUD->check_email($email);
+
+
+		if ($checkpname == 1) {
+			$get_pname_result = $this->add_CRUD->get_pname($pname);
+			foreach ($get_pname_result as $key => $row) {
+				$get_pname_email = $row['email'];
+			}
+			if ($email != $get_pname_email) {
+				$this->form_validation->set_message('check_word_validation', 'Incorrect email address.');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}else{
+			if ($checkemail == 1) {
+				$this->form_validation->set_message('check_word_validation', 'Email address already exist.');
+				return FALSE;
+			}else{
+				return TRUE;
+			}
+		}
+
 	}
 
 	public function save($word = ''){
@@ -29,14 +58,14 @@ class Add extends CI_Controller{
 		$header['main_menu'] = self::main_nav('add');
 		$header['sub_menu'] = self::sub_nav();
 		$header['word'] = '';
-
 		$data['success'] = FALSE;
+		
 
 		$formdata = array('word' => $this->input->post('word'),
 							'definition' => $this->input->post('definition'),
 							'example' => $this->input->post('example'),
 							'tags' => $this->input->post('tags'),
-							'author' => $this->input->post('author'),
+							'pname' => $this->input->post('pname'),
 							'email' => $this->input->post('email')
 							);
 		
@@ -44,13 +73,15 @@ class Add extends CI_Controller{
 		$this->form_validation->set_rules('word', 'Word', 'required');
 		$this->form_validation->set_rules('definition', 'Definition', 'required');
 		$this->form_validation->set_rules('example', 'Example', 'required');
-		$this->form_validation->set_rules('author', 'Author', 'required');
-		$this->form_validation->set_rules('email', 'Email', 'required');
+		$this->form_validation->set_rules('tags', 'Related Tags', 'required');
+		$this->form_validation->set_rules('pname', 'Psuedo Name', 'required|callback_check_pname,');
+		$this->form_validation->set_rules('email', 'Email', 'required|callback_check_word_validation['.$this->input->post('pname').']');
 
 
 		if ($this->form_validation->run() == FALSE)
 		{
-			$data['success'] = TRUE;
+
+			
 			$this->parser->parse('template/header', $header);
 			$this->load->view('add/add_view.php', $data);
 			$this->load->view('template/footer.php');
@@ -58,33 +89,16 @@ class Add extends CI_Controller{
 		else
 		{	//save the data
 
-			
+			$this->add_CRUD->add_to_db($formdata);
 
-
-			$this->load->view('add/success');
+			$this->parser->parse('template/header', $header);
+			$this->load->view('add/save_view.php', $data);
+			$this->load->view('template/footer.php');
 		}
 
 	}
 
-	private function populate_data($formdata){
-		//var_dump($formdata);
-		include 'global_class.php';
-		$global = new Global_class();
-		return $global;
-	}
-
-
-
-
-
-
-	//Class Helpers
-	private function load_global_class(){
-		include 'global_class.php';
-		$global = new Global_class();
-		return $global;
-	}
-
+	//function Helpers
 	public function main_nav($current_nav = 'home'){
 		//populate navication array
 		$navigation = array('home' => array('word of the day', 'glyphicon glyphicon-bookmark'),

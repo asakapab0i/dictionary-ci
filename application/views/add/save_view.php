@@ -10,7 +10,7 @@
             <div class="form-group">
               <label for="word">Word - 'ambot', 'hello world', 'utot'</label>
               <?php 
-              $data = array('value' => set_value('word'),
+              $data = array(
                             'name' => 'word',
                             'id' => 'word',
                             'class' => 'form-control'
@@ -21,7 +21,7 @@
             <div class="form-group">
               <label for="definition">Definition - 'this is awesome-word i just discovered!'</label>
               <?php 
-              $data = array('value' => set_value('definition'),
+              $data = array(
                             'name' => 'definition',
                             'id' => 'definition',
                             'class' => 'form-control',
@@ -33,7 +33,7 @@
             <div class="form-group">
               <label for="example">Example - what an awesome-word that is!</label>
                <?php 
-              $data = array('value' => set_value('example'),
+              $data = array(
                             'name' => 'example',
                             'id' => 'example',
                             'class' => 'form-control',
@@ -46,7 +46,7 @@
              <div class="form-group">
               <label for="tags">Related Tags - 'awesome, word, phrase, so cool'</label>
                <?php 
-              $data = array('value' => set_value('tags'),
+              $data = array(
                             'name' => 'tags',
                             'id' => 'tags',
                             'class' => 'form-control'
@@ -58,7 +58,7 @@
              <div class="form-group">
               <label for="pname">Psuedo Name - 'juan tamad'</label>
                <?php 
-              $data = array('value' => set_value('pname'),
+              $data = array(
                             'name' => 'pname',
                             'id' => 'pname',
                             'class' => 'form-control'
@@ -70,7 +70,7 @@
              <div class="form-group">
               <label for="tags">Email - 'juan@tamad.com'</label>
                <?php 
-              $data = array('value' => set_value('email'),
+              $data = array(
                             'name' => 'email',
                             'id' => 'email',
                             'class' => 'form-control'
@@ -89,9 +89,9 @@
         <div class="col-md-4 custom-mailing-list">
          
 
-              <?php 
-            echo validation_errors();
-        ?>
+
+            <div class="alert alert-success">Word is successfully submitted.</div>
+
 
 
         </div>
