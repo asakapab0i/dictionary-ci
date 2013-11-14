@@ -20,6 +20,3 @@ class Global_CRUD extends CI_Model {
           return $query = $this->db->query("SELECT * FROM word WHERE word > '$word' ORDER BY word ASC LIMIT $limit")->result_array();
      }
 }
-	/*
-	This code generates the index file
-	*/
