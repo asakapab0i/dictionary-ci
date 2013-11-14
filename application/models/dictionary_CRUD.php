@@ -61,8 +61,8 @@ class Dictionary_CRUD extends CI_Model {
 	}
 
 	public function permalink_get_define_word($word, $defid){
-
           $word = $this->db->escape_str($word);
+
 
 		return $this->db->query("SELECT word.word,
                                         word.id,
