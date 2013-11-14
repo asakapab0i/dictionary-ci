@@ -69,8 +69,17 @@ blockquote h1{
 }
 
 .custom-footer{
-	margin-bottom: 20px;
-	margin-top: 20px;
+   	position: relative;
+   	margin: 0 auto;
+}
+
+.custom-footer-ad{
+	margin: 0 auto;
+	margin-top: 10px;
+	text-align: center;
+	width: 780px;
+	height: 90px;
+	border: 1px solid #f5b54e;
 }
 
 .custom-list-word{
@@ -103,6 +112,7 @@ blockquote h1{
 
 .custom-menu{
 	margin-top: 10px;
+	margin: 10 auto;
 }
 
 /*.custom-menu a{

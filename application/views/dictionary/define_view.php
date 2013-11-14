@@ -5,7 +5,7 @@
                     {define_word}
                           <article class="custom-word">
                         <header>
-                            <h4><?php echo anchor('dictionary/permalink/{word}/{example_id}', '{word}');?></h4>
+                            <h4><?php echo anchor('dictionary/permalink/{word}/{defid}', '{word}');?></h4>
                             <p class="custom-date">{datew}</p>
                         </header>
                         <p>{definition}</p>

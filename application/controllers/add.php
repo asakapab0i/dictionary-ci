@@ -26,32 +26,7 @@ class Add extends CI_Controller{
 		$this->load->view('template/footer.php');
 	}
 
-	public function callback_check_word_validation($email, $pname){
-		$checkpname = $this->add_CRUD->check_pname($pname);
-		$checkemail = $this->add_CRUD->check_email($email);
 
-
-		if ($checkpname == 1) {
-			$get_pname_result = $this->add_CRUD->get_pname($pname);
-			foreach ($get_pname_result as $key => $row) {
-				$get_pname_email = $row['email'];
-			}
-			if ($email != $get_pname_email) {
-				$this->form_validation->set_message('check_word_validation', 'Incorrect email address.');
-				return FALSE;
-			}else{
-				return TRUE;
-			}
-		}else{
-			if ($checkemail == 1) {
-				$this->form_validation->set_message('check_word_validation', 'Email address already exist.');
-				return FALSE;
-			}else{
-				return TRUE;
-			}
-		}
-
-	}
 
 	public function save($word = ''){
 		$header['page_title'] = "Add word";
@@ -74,7 +49,7 @@ class Add extends CI_Controller{
 		$this->form_validation->set_rules('definition', 'Definition', 'required');
 		$this->form_validation->set_rules('example', 'Example', 'required');
 		$this->form_validation->set_rules('tags', 'Related Tags', 'required');
-		$this->form_validation->set_rules('pname', 'Psuedo Name', 'required|callback_check_pname,');
+		$this->form_validation->set_rules('pname', 'Psuedo Name', 'required,');
 		$this->form_validation->set_rules('email', 'Email', 'required|callback_check_word_validation['.$this->input->post('pname').']');
 
 
@@ -90,10 +65,37 @@ class Add extends CI_Controller{
 		{	//save the data
 
 			$this->add_CRUD->add_to_db($formdata);
-
 			$this->parser->parse('template/header', $header);
 			$this->load->view('add/save_view.php', $data);
 			$this->load->view('template/footer.php');
+		}
+
+	}
+
+		public function check_word_validation($email, $pname){
+		$check = $this->add_CRUD->check_pname_email($pname, $email);
+		$checkpname = $this->add_CRUD->check_pname($this->input->post('pname'));
+		$checkemail = $this->add_CRUD->check_email($this->input->post('email'));
+
+		// var_dump($check . $checkpname . $checkemail);
+		// die();
+
+		if ($check == 0) {
+			if ($checkpname == 0 && $checkemail == 0) {
+				return TRUE;
+			}elseif ($checkpname == 1 && $checkemail == 0) {
+				$this->form_validation->set_message('check_word_validation', 'Author name already exist.');
+		 		return FALSE;
+			}elseif($checkpname == 0 && $checkemail == 1){
+				$this->form_validation->set_message('check_word_validation', 'Email already exist.');
+		 		return FALSE;
+			}elseif($checkpname == 1 && $checkemail == 1){
+				$this->form_validation->set_message('check_word_validation', 'Either Author nor Email already exist.');
+		 		return FALSE;
+			}
+			
+		}elseif ($check == 1) {
+			return TRUE;
 		}
 
 	}

@@ -125,6 +125,7 @@ class Dictionary extends CI_Controller{
 
 		$data['perma_word'] = self::permaWord($word, $defid);
 		$data['tag_generator'] = self::generateTags($word, $defid);
+	
 
 		$data['sidebar_words_up'] = $global->sidebarUp($word);
 		$data['sidebar_words_current'] = $global->sidebarCurrent($word);
