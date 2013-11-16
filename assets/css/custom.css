@@ -1,4 +1,8 @@
 /*bootstrap overrides*/
+body{
+	/*background-image:url('../img/bg.jpg');*/
+}
+
 .form-control{
 	border-radius: 0px;
 }
